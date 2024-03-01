@@ -1,0 +1,28 @@
+////////////////// MyDispatcher ///////////////
+
+    Clasa MyDispatcher implementeaza logica nodurilor de calcul.
+Metoda addTask implementeaza logica specifica fiecarei politici
+de implementare. Pentru ROUND_ROBBIN task-urile sunt distribuite
+ciclic dupa descrierea din cerinta; pentru SHORTEST_QUEUE am
+asignat task-ul nodului cu cea mai mica coada de asteptare, iar 
+in caz de egalitate am ales nodul cu ID-ul mai mic, avand o
+implementare asemanatoare si pentru LEAST_WORK_LEFT (doar ca aici
+am tinut cont de rimpul de lucru ramas); pentru SIZE_INTERVAL_TASK_
+ASSIGNMENT task-urile sunt impartite in functie  de tipul lor.
+
+//////////////// MyHost /////////////////
+
+    Clasa MyHost reprezinta implementarea proprie a logicii de
+planificare. Coada de asteptare a task-urilor este implementata
+ca fiind un PriorityBlockingQueue, care asigura ordonarea acestora 
+in functie de prioritate si timpul de start. Metoda run() ruleaza 
+intr-o bucla infinita pana cand obiectul (ok) este oprit (intra in
+metoda shutdown). Ac easta asteapta sa preia si sa execute task-urile
+din coada. Metoda addTask adauga un task in coada. Daca task-ul este
+preemptibil, atunci se poate realizan preempatea in functie de prioritate.
+Metoda getQueueSize returneaza dimensiunea cozii. Metoda getWorkLeft
+returneaza timpul total de lucru ramas, tinand cont de task-ul aflat
+in executie si de cele din coada. Metoda shutdown este utilizata pentru
+a opri. Metoda preemptTask este folosita pentru a realiza preemptarea 
+unui task, inlocuind task-ul aflat in executie cu unul cu o prioritate
+mai mare.
